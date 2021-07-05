@@ -1,0 +1,20 @@
+All of our tools should run as region North America and as availability zone distributed to West US AZ(California) or East US AZ(Ohio).
+
+Bitbucket is used as version controller and repository.
+
+Jenkins clones selected version of the application from master branch on Bitbucket build docker image and push image to ECR.
+By next task, jenkins logins to EC2 instances(ECS can be use as alternative)and pull the image from ECR and run the container on the hosts.
+
+Our application runs on a cluster from 3 EC2 instances.
+
+Before a request from a customer to our application comes it will be come to Route53 for resolving the dns and forwarded to ELB for routing on a available host.
+ 
+For caching data I choose ElasticCache. As a relational database we can use RDS from Amazon services and for the rest of our data we can use DynmaoDB as NoSQL database.
+ 
+Its possible to use Kinesis for data streaming and que.Additionaly for our metadata and object storage we can use S3 Object storage.
+ 
+For a better netwok isolation its good to use VPC.
+ 
+At least for monitoring our tools on VPC, CloudWatch is a alternative for monitoring and to authenticate users on our instances we can integrate ActiceDirectory as IAM.
+ 
+On second design Amazon services are replaced with alternative opensource tools which are running on EC2 instances to decrease costs. This flow is similar with IaaS(Infrastructure as a Service).

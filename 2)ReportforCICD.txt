@@ -1,0 +1,10 @@
+On first task of our jenkins pipeline we clone our code from bitbucket repository and send to second task for eslint code review.
+
+If coverage is passed we build the source code and when its completed succesfully it can be send to Sonar runner for test. After getting succes message from sonar we can build docker image and send the builded image to our registry.
+
+
+In second job our jenkins connects to Test EC2 instances and set environment variables for Test cluster.After setting env to cluster we can pull image from registry and run docker image. When our application runs succesfully for gettting sure we can run healthcheck task and complete deployment to Test cluster. If some of our DNS requests turns http 4** or 5*** pipeline will crash.
+
+Same processes like Test cluster is runnning for Staging cluster. Our jenkins connects to EC2 instance and set env to cluster. After it we pull docker image and run. At least we can run healtcheck for running containers.If some of our DNS requests turns http 4** or 5*** pipeline will crash.
+
+We run same flow with nonprod cluster on prodcution but maybe we can set a task on jenkins to check approvement of a Manager. Jira can be use for approvement task and to dont lost any request during deployment we can deploy our application to production Blue-Green.
